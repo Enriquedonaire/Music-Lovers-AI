@@ -1,60 +1,45 @@
-import axios from "axios";
+import axios from 'axios';
 
-const api = axios.create({
-  baseURL: "https://open-api.tiktok.com/",
-  timeout: 10000,
-});
-
-export const authenticate = (clientId, redirectUri) => {
-  const authUrl = `https://open-api.tiktok.com/platform/oauth/connect/?client_key=${clientId}&response_type=code&scope=user.info.basic,video.list&redirect_uri=${encodeURIComponent(
-    redirectUri
-  )}`;
+export const authenticate = (clientKey, redirectUri) => {
+  const authUrl = `https://www.tiktok.com/v2/auth/authorize/?client_key=${clientKey}&redirect_uri=${encodeURIComponent(redirectUri)}&response_type=code&scope=user.info.basic,video.list`;
   window.location.href = authUrl;
 };
 
-export const getAccessToken = async (
-  clientId,
-  clientSecret,
-  code,
-  redirectUri
-) => {
+export const getAccessToken = async (clientKey, clientSecret, code, redirectUri) => {
   try {
-    const response = await api.post("oauth/access_token/", null, {
+    const response = await axios.post('https://open-api.tiktok.com/oauth/access_token/', null, {
       params: {
-        client_key: process.env.REACT_APP_TIKTOK_CLIENT_ID,
-        client_secret: process.env.REACT_APP_TIKTOK_CLIENT_SECRET,
+        client_key: clientKey,
+        client_secret: clientSecret,
         code,
-        grant_type: "authorization_code",
+        grant_type: 'authorization_code',
         redirect_uri: redirectUri,
       },
     });
+
     return response.data.data.access_token;
   } catch (error) {
-    console.log("Error getting access token:", error.message);
+    console.error('Error getting access token:', error);
     throw error;
   }
 };
 
-export const getUserInfo = async (accessToken) => {
+export const fetchUserInfo = async () => {
   try {
-    const response = await api.get("user/info/", {
-      params: { access_token: accessToken },
-    });
-    return response.data.data;
+    const response = await axios.get('/api/userinfo');
+    return response.data;
   } catch (error) {
-    console.log("Error getting user info:", error.message);
+    console.error('Error fetching user info:', error);
     throw error;
   }
 };
 
-export const getUserVideos = async (accessToken) => {
+export const fetchUserVideos = async () => {
   try {
-    const response = await api.get("video/list/", {
-      params: { access_token: accessToken, count: 10 },
-    });
-    return response.data.data.videos;
+    const response = await axios.get('/api/uservideos');
+    return response.data;
   } catch (error) {
-    console.log("Error getting user videos:", error.message);
+    console.error('Error fetching user videos:', error);
     throw error;
   }
 };
