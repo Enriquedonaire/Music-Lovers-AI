@@ -1,11 +1,20 @@
+import React from 'react';
+import { Link } from 'react-router-dom';
 
 const PrivacyPolicy = () => {
   return (
-    <div>
-      <h1>Privacy Policy</h1>
-      <p>
-        This is the privacy policy for Music Lovers. We respect your privacy and are committed to protecting your personal data...
-      </p>
+    <div className="flex flex-col items-center">
+      <div className="bg-[#222D7A] w-full font-bold p-4 text-center"></div>
+      <iframe
+        src="https://henko-ai.com/politica-de-privacidad/"
+        title="Henko-AI Privacy Policy"
+        className="w-full h-[80vh] border-none"
+      />
+      <div className="bg-[#222D7A] text-white flex items-center justify-center h-52 w-full">
+        <Link to="/" className="text-white text-lg font-bold hover:underline">
+          Back to Home
+        </Link>
+      </div>
     </div>
   );
 };

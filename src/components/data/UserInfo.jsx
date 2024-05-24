@@ -1,22 +1,15 @@
 import React, { useEffect, useState } from 'react';
 import { fetchUserInfo } from '../../utils/api';
 
-const UserInfo = () => {
+const UserInfo = ({ accessToken }) => {
   const [userInfo, setUserInfo] = useState(null);
   const [error, setError] = useState(null);
 
   useEffect(() => {
-    const getUserInfo = async () => {
-      try {
-        const data = await fetchUserInfo();
-        setUserInfo(data);
-      } catch (error) {
-        setError(error.message);
-      }
-    };
-
-    getUserInfo();
-  }, []);
+    fetchUserInfo(accessToken)
+      .then((data) => setUserInfo(data))
+      .catch((err) => setError(err.message));
+  }, [accessToken]);
 
   if (error) {
     return <p>Error: {error}</p>;
@@ -28,13 +21,10 @@ const UserInfo = () => {
 
   return (
     <div>
-      <h2>User Info</h2>
-        <h1>{userInfo.nickname}</h1>
-        <p>{userInfo.signature}</p>
-        <img src={userInfo.avatar} alt={userInfo.nickname} />
+      <img src={userInfo.avatar_url} alt="Avatar" />
+      <h2>{userInfo.display_name}</h2>
     </div>
   );
 };
 
 export default UserInfo;
-
