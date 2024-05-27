@@ -13,7 +13,7 @@ const Home = ({ accessToken }) => {
   };
 
   return (
-    <div className="flex flex-col items-center justify-center min-h-screen bg-blue-500">
+    <div className="flex flex-col items-center justify-center min-h-screen bg-[#222D7A]">
       <h1 className="text-4xl font-bold text-white mb-6">Welcome to Music Lovers</h1>
       {!accessToken && (
         <button
