@@ -5,10 +5,9 @@ import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 
-// Obtén el contenedor raíz donde montaremos la aplicación
+
 const container = document.getElementById('root');
 
-// Crea la raíz y monta la aplicación
 const root = createRoot(container);
 
 root.render(
