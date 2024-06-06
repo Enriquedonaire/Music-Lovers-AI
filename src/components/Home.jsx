@@ -13,12 +13,12 @@ const Home = ({ accessToken }) => {
   };
 
   return (
-    <div className="flex flex-col items-center justify-center min-h-screen bg-[#222D7A]">
+    <div className="flex flex-col items-center justify-center min-h-screen bg-[#1f2138]">
       <h1 className="text-4xl font-bold text-white mb-6">Welcome to Music Lovers</h1>
       {!accessToken && (
         <button
           onClick={requestToken}
-          className="px-6 py-3 bg-red-600 text-white rounded-full hover:bg-red-700 focus:outline-none"
+          className="px-6 py-3 bg-[#af3030] text-white rounded-full hover:bg-[#e44e56] focus:outline-none"
         >
           Login with TikTok
         </button>
