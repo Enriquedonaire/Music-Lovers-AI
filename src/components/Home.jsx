@@ -18,7 +18,7 @@ const Home = ({ accessToken }) => {
       {!accessToken && (
         <button
           onClick={requestToken}
-          className="px-6 py-3 bg-[#af3030] text-white rounded-full hover:bg-[#e44e56] focus:outline-none"
+          className="px-6 py-3 bg-[#8a1717] text-white rounded-full hover:bg-[#d82f37] focus:outline-none"
         >
           Login with TikTok
         </button>
